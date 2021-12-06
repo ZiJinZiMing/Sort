@@ -62,17 +62,24 @@ void InsertSort(vector<int> &arr) {
 void ShellSort(vector<int> &arr) {
     int gap, i, j;
     auto len = arr.size();
-    for (gap = len >> 1; gap > 0; gap >> 1) {
+    for (gap = len >> 1; gap > 0; gap >>= 1) {
         for (i = gap; i < len; ++i) {
             auto t = arr[i];
-            for (j = i - gap; j > 0; j -= gap) {
-                if (arr[j] > arr[j + gap]) {
-                    swap(arr[j], arr[j + gap]);
-                }
+            for (j = i - gap; j >= 0 && arr[j] < t; j -= gap) {
+                swap(arr[j], arr[j + gap]);
             }
             arr[j + gap] = t;
         }
     }
+}
+
+void MergeSort(vector<int> &arr) {
+    auto *a = &arr;
+    auto *b = new vector<int>(arr.size());
+
+
+
+    delete b;
 }
 
 
@@ -94,7 +101,7 @@ int main() {
         arr.push_back(rand() % 100);
     }
     showArr(arr);
-
+    SPDLOG_INFO("-------------------");
     BubbleSort(arr);
     showArr(arr);
 
@@ -106,6 +113,7 @@ int main() {
 
     ShellSort(arr);
     showArr(arr);
+
 
 
     return 0;
