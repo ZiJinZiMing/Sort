@@ -59,7 +59,21 @@ void InsertSort(vector<int> &arr) {
 }
 
 
-
+void ShellSort(vector<int> &arr) {
+    int gap, i, j;
+    auto len = arr.size();
+    for (gap = len >> 1; gap > 0; gap >> 1) {
+        for (i = gap; i < len; ++i) {
+            auto t = arr[i];
+            for (j = i - gap; j > 0; j -= gap) {
+                if (arr[j] > arr[j + gap]) {
+                    swap(arr[j], arr[j + gap]);
+                }
+            }
+            arr[j + gap] = t;
+        }
+    }
+}
 
 
 void showArr(const vector<int> &arr) {
@@ -88,6 +102,9 @@ int main() {
     showArr(arr);
 
     InsertSort(arr);
+    showArr(arr);
+
+    ShellSort(arr);
     showArr(arr);
 
 
